@@ -1,7 +1,6 @@
-export class Producto {
-    id!: string;
-    nombre!: string;
-    precio!: number;
-    descripcion!: string;
-  }
-  
+export class producto {
+    id?:string;
+    Cantidad!: number;
+    Descripcion!: string;
+    Precio!: number;
+}

@@ -1,0 +1,61 @@
+<div style="margin: 20px;">
+    <h1>Catalogo de libros</h1>
+    <h4>Alta de libros</h4>
+    <hr />
+    <p></p>
+    <h4>Listado de libros</h4>
+    <table class="table">
+        <thead>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Año de publicacion</th>
+            <th>Seleccionar</th>
+        </thead>
+        <tbody>
+            @for(libro of libros; track libro.id){
+                <tr>
+                    <td>{{libro.titulo}}</td>
+                    <td>{{libro.autor}}</td>
+                    <td>{{libro.editorial}}</td>
+                    <td>{{libro.anio}}</td>
+                    <td>
+                        <button type = "button" class="btn btn-success"
+                        (click)="selectLibro(libro)">Seleccionar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-sm-4">
+        <p>
+            <label>Titulo del libro</label>
+            <input type="text" class="form-control"[(ngModel)]="libro.titulo">
+
+            <label>Autor del libro</label>
+            <input type="text" class="form-control"[(ngModel)]="libro.autor">
+
+            <label>Anio del libro</label>
+            <input type="text" class="form-control"[(ngModel)]="libro.anio">
+
+            <label>Editorial del Libro</label>
+            <input type="text" class="form-control"[(ngModel)]="libro.editorial">
+        </p>
+        <table>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-primary"
+                    (click)="insertarLibro()">Insertar libro</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning"
+                    (click)="updateLibro()">Actualizar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger"
+                    (click)="deleteLibro()">Eliminar Libro</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

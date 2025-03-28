@@ -1,50 +1,47 @@
 import { Component } from '@angular/core';
-import { Producto } from '../../models/producto.model';
-import { ProductoService } from '../../services/producto.service';
+import { producto } from '../../models/producto.model';
+import { ServicesService } from '../../services/services.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-productos',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+  styleUrl: './productos.component.css'
 })
 export class ProductosComponent {
-  productos: Producto[] = [];  // Aquí vamos a guardar la lista de productos obtenida
-  producto: Producto = { id: '', nombre: '', precio: 0, descripcion: '' };
 
-  constructor(private productoService: ProductoService) {
-    this.getProductos();  // Llamamos al método para obtener los productos
+  productos: any;
+  producto = new producto();
+
+  constructor(private serviceService: ServicesService){
+    this.getProductos();
   }
 
-  getProductos() {
-    this.productoService.getProductos().subscribe((productos: Producto[]) => {
-      this.productos = productos;  // Guardamos la lista de productos en la propiedad productos
-    });
+  async getProductos(): Promise<void>{
+    this.productos = await firstValueFrom(this.serviceService.getProductos());
   }
 
-  insertarProducto() {
-    this.productoService.agregarProducto(this.producto);
-    this.resetProducto();  // Reinicia el formulario después de agregar el producto
+  async insertarProducto(){
+    await this.serviceService.aggregarProducto(this.producto);
+    this.getProductos();
+    this.producto = new producto();
   }
 
-  selectProducto(productoSeleccionado: Producto) {
-    this.producto = { ...productoSeleccionado };  // Rellenamos el formulario con el producto seleccionado
+  selectProducto(productoSeleccionado: producto){
+    this.producto = productoSeleccionado;
   }
 
-  updateProducto() {
-    this.productoService.modificarProducto(this.producto);
-    this.resetProducto();  // Reinicia el formulario después de modificar el producto
+  async updateProducto(){
+    await this.serviceService.modificarProducto(this.producto);
+    this.producto = new producto();
+    this.getProductos();
   }
 
-  deleteProducto() {
-    this.productoService.eliminarProducto(this.producto);
-    this.resetProducto();  // Reinicia el formulario después de eliminar el producto
-  }
-
-  private resetProducto() {
-    this.producto = { id: '', nombre: '', precio: 0, descripcion: '' };  // Resetea el objeto producto
+  async deleteProducto(){
+    await this.serviceService.eliminarProducto(this.producto);
+    this.producto = new producto();
+    this.getProductos();
   }
 }

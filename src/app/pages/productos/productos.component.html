@@ -1,65 +1,55 @@
 <div style="margin: 20px;">
-    <h1>Catálogo de Productos</h1>
-
+    <h1>Catalogo de Productos</h1>
     <h4>Alta de Productos</h4>
-
+    <hr/>
+    <p></p>
+    <h4>Listado de Productos</h4>
+    <table class="table">
+        <thead>
+            <th>Cantidad</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+        </thead>
+        <tbody>
+            @for(producto of productos; track producto.id){
+                <tr>
+                    <td>{{producto.Cantidad}}</td>
+                    <td>{{producto.Descripcion}}</td>
+                    <td>{{producto.Precio}}</td>
+                    <td>
+                        <button type = "button" class="btn btn-success"
+                        (click)="selectProducto(producto)">Seleccionar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
     <div class="col-sm-4">
         <p>
-            <label>Nombre:</label>
-            <input type="text" class="form-control" [(ngModel)]="producto.nombre" />
-        </p>
+            <label>Cantidad del producto</label>
+            <input type="text" class="form-control"[(ngModel)]="producto.Cantidad">
 
-        <p>
-            <label>Precio:</label>
-            <input type="number" class="form-control" [(ngModel)]="producto.precio" />
-        </p>
+            <label>Descripcion del producto</label>
+            <input type="text" class="form-control"[(ngModel)]="producto.Descripcion">
 
-        <p>
-            <label>Descripción:</label>
-            <input type="text" class="form-control" [(ngModel)]="producto.descripcion" />
+            <label>Precio</label>
+            <input type="text" class="form-control"[(ngModel)]="producto.Precio">
         </p>
-
         <table>
             <tr>
                 <td>
-                    <button type="button" class="btn btn-primary" (click)="insertarProducto()">Insertar</button>
+                    <button type="button" class="btn btn-primary"
+                    (click)="insertarProducto()">Insertar producto</button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-warning" (click)="updateProducto()">Modificar</button>
+                    <button type="button" class="btn btn-warning"
+                    (click)="updateProducto()">Actualizar</button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" (click)="deleteProducto()">Eliminar</button>
+                    <button type="button" class="btn btn-danger"
+                    (click)="deleteProducto()">Eliminar Producto</button>
                 </td>
             </tr>
-        </table>
-    </div>
-
-    <hr>
-
-    <div class="table-responsive">
-        <table class="table table-bordered w-100">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Descripción</th>
-                    <th>Seleccionar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (producto of productos; track producto.id) {
-                    <tr>
-                        <td>{{ producto.nombre }}</td>
-                        <td>{{ producto.precio }}</td>
-                        <td>{{ producto.descripcion }}</td>
-                        <td>
-                            <button type="button" class="btn btn-success" (click)="selectProducto(producto)">
-                                Seleccionar
-                            </button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
         </table>
     </div>
 </div>

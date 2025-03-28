@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
-import { LibroComponent } from './pages/libro/libro.component';
+import { LibrosComponent } from './pages/libros/libros.component';
 import { ProductosComponent } from './pages/productos/productos.component';
-import { EjercicioParcialComponent } from './pages/ejercicio-parcial/ejercicio-parcial.component';
-import { AcercaDeComponent } from './pages/acerca-de/acerca-de.component';
-import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { EjeComponent } from './pages/eje/eje.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'libros', component: LibroComponent },
-  { path: 'productos', component: ProductosComponent },
-  { path: 'ejercicio-parcial', component: EjercicioParcialComponent },
-  { path: 'acerca-de', component: AcercaDeComponent }
+    {path: 'libros', component: LibrosComponent},
+    {path: 'productos', component: ProductosComponent},
+    {path: 'about', component: AboutComponent},
+    {path: 'ejercicio', component: EjeComponent},
+    {path: '**', redirectTo: 'libros'}
 ];

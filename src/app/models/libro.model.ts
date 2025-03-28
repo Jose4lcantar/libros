@@ -1,7 +1,7 @@
-export class Libro {
-    id!: string;
+export class libro {
+    id!:string;
     titulo!: string;
-    autor!: string;
-    editorial!: string;
-    anioPublicacion!: number;
+    autor! : string;
+    editorial!:string;
+    anio!:number;
 }
